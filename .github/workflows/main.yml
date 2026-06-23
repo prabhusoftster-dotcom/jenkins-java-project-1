@@ -28,11 +28,8 @@ jobs:
       - name: Artifact
         run: mvn package
 
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          unzip -q awscliv2.zip
-          sudo ./aws/install --update
-          aws --version
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-artifact
+          path: target/*.jar
